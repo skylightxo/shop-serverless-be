@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Coca-Cola Zero",
+      "price": "$1.00",
+      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola-zero.png"
+    },
+    {
+      "id": "2",
+      "name": "Coca-Cola Zero Vanilla",
+      "price": "$1.25",
+      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola-zero-vanilla.png"
+    },
+    {
+      "id": "3",
+      "name": "Sprite",
+      "price": "$1.00",
+      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-sprite.png"
+    },
+    {
+      "id": "4",
+      "name": "Fanta",
+      "price": "$0.75",
+      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola-zero.png"
+    },
+    {
+      "id": "5",
+      "name": "Coca-Cola",
+      "price": "$0.95",
+      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola.png"
+    },
+    {
+      "id": "6",
+      "name": "Fanta Mango",
+      "price": "$1.00",
+      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-fanta-mango.png"
+    }
+  ]
+}
