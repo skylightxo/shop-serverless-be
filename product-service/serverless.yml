@@ -107,8 +107,15 @@ functions:
 #            host: example.com
 #            path: /hello
 
-# plugins:
-#   - serverless-webpack
+plugins:
+  - serverless-auto-swagger
+
+custom:
+  autoswagger:
+    apiType: "http"
+    generateSwaggerOnDeploy: true
+    schemes: ["http", "https", "ws", "wss"]
+    excludeStages: ["production", "anyOtherStage"]
 #    Define function environment variables here
 #    environment:
 #      variable2: value2
