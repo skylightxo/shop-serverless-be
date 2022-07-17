@@ -2,44 +2,50 @@
   "products": [
     {
       "id": "1",
-      "name": "Coca-Cola Zero",
-      "price": "$1.00",
+      "title": "Coca-Cola Zero",
+      "price": "1.00",
+      "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://static.wixstatic.com/media/6882fa_12761ff7a3a0473d8283344316afd376~mv2.jpg/v1/fill/w_800,h_800,al_c,q_85/6882fa_12761ff7a3a0473d8283344316afd376~mv2.jpg"
     },
     {
       "id": "2",
-      "name": "Coca-Cola Zero Vanilla",
-      "price": "$1.25",
+      "title": "Coca-Cola Zero Vanilla",
+      "price": "1.25",
       "image": "https://us.coca-cola.com/content/dam/nagbrands/us/coke/en/products/coca-cola-flavors/2022-package-update/smaller-can-images/vanilla-zero-sugar_12oz_desktop.jpg?wid=325"
     },
     {
       "id": "3",
-      "name": "Sprite",
-      "price": "$1.00",
+      "title": "Sprite",
+      "price": "1.00",
+      "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://content2.rozetka.com.ua/goods/images/big/48718638.jpg"
     },
     {
       "id": "4",
-      "name": "Fanta",
-      "price": "$0.75",
+      "title": "Fanta",
+      "price": "0.75",
+      "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://www.coca-cola.ua/content/dam/one/ua/uk/products/fanta-vitaminC.png"
     },
     {
       "id": "5",
-      "name": "Coca-Cola",
-      "price": "$0.95",
+      "title": "Coca-Cola",
+      "price": "0.95",
+      "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://s.wine.style/images_gen/508/50827/0_0_orig.jpg"
     },
     {
       "id": "6",
-      "name": "Fanta Mango",
-      "price": "$1.00",
+      "title": "Fanta Mango",
+      "price": "1.00",
+      "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://content.rozetka.com.ua/goods/images/original/131967272.jpg"
     },
     {
       "id": "7",
-      "name": "Coca-Cola Cherry Vanilla",
-      "price": "$1.25",
+      "title": "Coca-Cola Cherry Vanilla",
+      "price": "1.25",
+      "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "image": "https://images.prom.ua/3165921067_w640_h640_gazirovka-coca-cola-cherry.jpg"
     }
   ]

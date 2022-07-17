@@ -1,6 +1,6 @@
 "use strict";
 
-const { products } = require("../products.json");
+const { products } = require("./products.json");
 
 const getProductsById = async (event) => {
   const { productId } = event.pathParameters;
@@ -18,6 +18,11 @@ const getProductsById = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(product, null, 2),
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
   };
 };
 
@@ -34,6 +39,11 @@ const getProductsList = async (event) => {
   return {
     statusCode: 200,
     body: JSON.stringify(products, null, 2),
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
   };
 };
 
