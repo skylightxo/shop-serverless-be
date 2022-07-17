@@ -60,13 +60,13 @@ provider:
 
 functions:
   getProductsList:
-    handler: getProductsList.hello
+    handler: handler.getProductsList
     events:
       - http:
           path: products
           method: get
   getProductsById:
-    handler: getProductsById.hello
+    handler: handler.getProductsById
     events:
       - http:
           path: products/{productId}
@@ -107,6 +107,8 @@ functions:
 #            host: example.com
 #            path: /hello
 
+# plugins:
+#   - serverless-webpack
 #    Define function environment variables here
 #    environment:
 #      variable2: value2

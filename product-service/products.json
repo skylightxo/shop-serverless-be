@@ -4,37 +4,43 @@
       "id": "1",
       "name": "Coca-Cola Zero",
       "price": "$1.00",
-      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola-zero.png"
+      "image": "https://static.wixstatic.com/media/6882fa_12761ff7a3a0473d8283344316afd376~mv2.jpg/v1/fill/w_800,h_800,al_c,q_85/6882fa_12761ff7a3a0473d8283344316afd376~mv2.jpg"
     },
     {
       "id": "2",
       "name": "Coca-Cola Zero Vanilla",
       "price": "$1.25",
-      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola-zero-vanilla.png"
+      "image": "https://us.coca-cola.com/content/dam/nagbrands/us/coke/en/products/coca-cola-flavors/2022-package-update/smaller-can-images/vanilla-zero-sugar_12oz_desktop.jpg?wid=325"
     },
     {
       "id": "3",
       "name": "Sprite",
       "price": "$1.00",
-      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-sprite.png"
+      "image": "https://content2.rozetka.com.ua/goods/images/big/48718638.jpg"
     },
     {
       "id": "4",
       "name": "Fanta",
       "price": "$0.75",
-      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola-zero.png"
+      "image": "https://www.coca-cola.ua/content/dam/one/ua/uk/products/fanta-vitaminC.png"
     },
     {
       "id": "5",
       "name": "Coca-Cola",
       "price": "$0.95",
-      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-coca-cola.png"
+      "image": "https://s.wine.style/images_gen/508/50827/0_0_orig.jpg"
     },
     {
       "id": "6",
       "name": "Fanta Mango",
       "price": "$1.00",
-      "image": "https://www.coca-cola.com/content/dam/coke/us/en/images/brand/logo-fanta-mango.png"
+      "image": "https://content.rozetka.com.ua/goods/images/original/131967272.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Coca-Cola Cherry Vanilla",
+      "price": "$1.25",
+      "image": "https://images.prom.ua/3165921067_w640_h640_gazirovka-coca-cola-cherry.jpg"
     }
   ]
 }
