@@ -13,5 +13,9 @@
     "jest": "^28.1.3",
     "serverless-auto-swagger": "^2.8.2",
     "serverless-webpack": "^5.7.1"
+  },
+  "dependencies": {
+    "joi": "^17.6.0",
+    "pg": "^8.7.3"
   }
 }
