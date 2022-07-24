@@ -55,17 +55,11 @@ const getProductsById = async (event) => {
   }
 };
 
-const getProductsList = async (event) => {
+const getProductsList = async (event, context) => {
   const client = createClient();
-  client.connect((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Connected to database");
-    }
-  });
 
   try {
+    await client.connect();
     const { rows: products } = await client.query(
       `
             SELECT p.id, p.title, p.description, p.price, s.count
