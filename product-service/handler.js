@@ -79,6 +79,7 @@ const getProductsList = async (event) => {
 
 const createProduct = async (data) => {
   const { error } = newProductSchema.validate(data);
+  const { title, description, price } = JSON.parse(event.body);
 
   if (error) {
     return {
