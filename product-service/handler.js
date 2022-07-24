@@ -1,7 +1,7 @@
 "use strict";
 
-import { Client } from "pg";
-import { newProductSchema } from "./schemas/product.schema";
+const { Client } = require("pg");
+const { newProductSchema } = require("./schemas/product.schema");
 
 const { PG_HOST, PG_PORT, PG_DATABASE, PG_USERNAME, PG_PASSWORD } = process.env;
 
@@ -69,7 +69,7 @@ const getProductsList = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: "Internal server error",
+        message: error.message,
       }),
     };
   } finally {

@@ -20,9 +20,19 @@ service: serverless-course
 # Check out our docs for more details
 frameworkVersion: "3"
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    PG_HOST: ${env:PG_HOST}
+    PG_PORT: ${env:PG_PORT}
+    PG_DATABASE: ${env:PG_DATABASE}
+    PG_USERNAME: ${env:PG_USERNAME}
+    PG_PASSWORD: ${env:PG_PASSWORD}
+  iamManagedPolicies:
+    - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 
   # you can overwrite defaults here
   stage: dev
@@ -122,7 +132,7 @@ plugins:
 custom:
   autoswagger:
     apiType: "http"
-    generateSwaggerOnDeploy: true
+    generateSwaggerOnDeploy: false
     schemes: ["http", "https", "ws", "wss"]
     excludeStages: ["production", "anyOtherStage"]
 #    Define function environment variables here
