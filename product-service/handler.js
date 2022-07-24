@@ -36,6 +36,11 @@ const getProductsById = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify(products[0], null, 2),
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
     };
   } catch (error) {
     console.log(error);
@@ -52,7 +57,13 @@ const getProductsById = async (event) => {
 
 const getProductsList = async (event) => {
   const client = createClient();
-  await client.connect();
+  client.connect((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Connected to database");
+    }
+  });
 
   try {
     const { rows: products } = await client.query(
@@ -63,13 +74,21 @@ const getProductsList = async (event) => {
         `
     );
 
-    return products;
+    return {
+      statusCode: 200,
+      body: JSON.stringify(products, null, 2),
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    };
   } catch (error) {
     console.log(error);
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: error.message,
+        message: "Internal server error",
       }),
     };
   } finally {
@@ -78,14 +97,14 @@ const getProductsList = async (event) => {
 };
 
 const createProduct = async (event) => {
-  const { error } = newProductSchema.validate(event.body);
+  const { error } = newProductSchema.validate(JSON.parse(event.body));
   const { title, description, price, count } = JSON.parse(event.body);
 
   if (error) {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: `Validation error, ${error.details.message}`,
+        message: `Validation error`,
       }),
     };
   }
@@ -117,7 +136,15 @@ const createProduct = async (event) => {
 
     await client.query("COMMIT");
 
-    return newProductId;
+    return {
+      statusCode: 201,
+      body: newProductId,
+      headers: {
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    };
   } catch (error) {
     await client.query("ROLLBACK");
 
