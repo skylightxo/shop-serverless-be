@@ -43,7 +43,7 @@ const getProductsById = async (event) => {
       },
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -91,20 +91,26 @@ const getProductsList = async (event, context) => {
 };
 
 const createProduct = async (event) => {
-  const { error } = newProductSchema.validate(JSON.parse(event.body));
-  const { title, description, price, count } = JSON.parse(event.body);
+  const reqBody = JSON.parse(event.body);
+  const { error } = newProductSchema.validate(reqBody);
 
   if (error) {
+    const validationErrorDetails = error.details
+      .map((detail) => detail.message)
+      .join(" ");
+
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: `Validation error`,
+        message: `Validation error, ${validationErrorDetails}`,
       }),
     };
   }
 
   const client = createClient();
   await client.connect();
+
+  const { title, description, price, count } = reqBody;
 
   try {
     client.query("BEGIN");
@@ -123,7 +129,7 @@ const createProduct = async (event) => {
     await client.query(
       `
             INSERT INTO stocks (product_id, count) 
-            VALUE ($1, $2)
+            VALUES ($1, $2)
     `,
       [newProductId, count]
     );
@@ -132,7 +138,9 @@ const createProduct = async (event) => {
 
     return {
       statusCode: 201,
-      body: newProductId,
+      body: JSON.stringify({
+        id: newProductId,
+      }),
       headers: {
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Origin": "*",
@@ -141,6 +149,7 @@ const createProduct = async (event) => {
     };
   } catch (error) {
     await client.query("ROLLBACK");
+    console.error(error);
 
     return {
       statusCode: 500,
