@@ -22,6 +22,8 @@ const getProductsById = async (event) => {
 
   const { productId } = event.pathParameters;
 
+  console.log(event, productId);
+
   try {
     const { rows: products } = await client.query(
       `
@@ -55,8 +57,10 @@ const getProductsById = async (event) => {
   }
 };
 
-const getProductsList = async (event, context) => {
+const getProductsList = async (event) => {
   const client = createClient();
+
+  console.log(event);
 
   try {
     await client.connect();
@@ -91,6 +95,8 @@ const getProductsList = async (event, context) => {
 };
 
 const createProduct = async (event) => {
+  console.log(event);
+
   const reqBody = JSON.parse(event.body);
   const { error } = newProductSchema.validate(reqBody);
 
