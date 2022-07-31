@@ -1,0 +1,1 @@
+aws rds create-db-instance --db-instance-identifier pgdbinstance --allocated-storage 20 --db-instance-class db.t4g.micro --engine postgres --master-username my_root --master-user-password my_root_pass
