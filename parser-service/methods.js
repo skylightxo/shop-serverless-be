@@ -4,14 +4,14 @@ const csv = require('csv-parser')
 
 const BUCKET_NAME = process.env.FILE_UPLOAD_BUCKET_NAME;
 
-async function csvParse(stream) {
+async function csvParse({ stream, key }) {
   const chunks = [];
 
   return new Promise((resolve, reject) => {
     stream
       .pipe(csv())
       .on('data', (data) => chunks.push(data))
-      .on('end', () => resolve(chunks))
+      .on('end', () => resolve({ file: chunks, key }))
       .on('error', (err) => reject(err))
   })
 }
@@ -20,15 +20,18 @@ async function getReadStreamsFromRecords(records) {
   return records.map(record => {
     const params = { Bucket: BUCKET_NAME, Key: record.s3.object.key }
 
-    return s3.getObject(params).createReadStream()
+    return {
+      stream: s3.getObject(params).createReadStream(),
+      key: record.s3.object.key.split('/')[1].split('.')[0]
+    }
   })
 }
 
 async function bulkUpload(files) {
-  const promises = files.map(file => {
+  const promises = files.map(({ file, key }) => {
     const params = {
       Bucket: BUCKET_NAME,
-      Key: `parsed/${new Date().toISOString()}.json`,
+      Key: `parsed/${key}.json`,
       Body: Buffer.from(JSON.stringify({ data: file })),
       ContentEncoding: 'base64',
       ContentType: 'application/json; charset=utf-8'

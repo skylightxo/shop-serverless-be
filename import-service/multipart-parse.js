@@ -16,7 +16,7 @@ function parse(multipartBodyBuffer, boundary) {
     Object.defineProperty(file, 'type',
       { value: contentType, writable: true, enumerable: true, configurable: true })
     Object.defineProperty(file, 'data',
-      { value: new Buffer(part.part), writable: true, enumerable: true, configurable: true })
+      { value: Buffer.from(part.part), writable: true, enumerable: true, configurable: true })
     return file;
   }
   var prev = null;

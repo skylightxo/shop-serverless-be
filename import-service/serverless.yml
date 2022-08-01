@@ -1,23 +1,32 @@
-# org: ruslanyusufov
 # console: true
-service: upload
+service: import-service
 frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs12.x
-  region: us-east-2
+  region: eu-west-1
   stage: dev
   memorySize: 128 # mb
   timeout: 10 # seconds
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - "s3:Put*"
+        - "s3:GetObject*"
+        # Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
+      Resource: !Join ["/", [!GetAtt FileBucket.Arn, "*"]]
   environment:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
+    EXPIRES_IN: 86400
 
 plugins:
   - serverless-iam-roles-per-function
+  # - serverless-plugin-log-retention
 
 custom:
   fileBucketName: aws-course-file-storage #s3-file-bucket-${self:provider.stage}
+  # logRetentionInDays: 5
 
 # you can overwrite defaults here
 #  stage: dev
@@ -55,21 +64,22 @@ custom:
 
 functions:
   upload:
-    handler: handler.upload
+    handler: handler.import
     events:
       - http:
-          path: /upload
+          path: /import
           method: post
           request:
             parameters:
               querystrings:
                 name: true
           cors: true
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - "s3:Put*"
-        Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
+    # iamRoleStatements:
+    #   - Effect: Allow
+    #     Action:
+    #       - "s3:Put*"
+    #     # Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
+    #     Resource: !Join ["/", [!GetAtt privateUploadsBucket.Arn, "*"]]
 
 resources:
   Resources:
@@ -77,7 +87,13 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.fileBucketName}
-        AccessControl: Private
+        # BucketName: !Join ["-", ["youtube-demo-private-uploads", "${self:provider.stage}"]]
+        # AccessControl: Private
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: TRUE
+          BlockPublicPolicy: TRUE
+          IgnorePublicAcls: TRUE
+          RestrictPublicBuckets: TRUE
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)

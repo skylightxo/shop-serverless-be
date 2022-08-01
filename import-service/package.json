@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "aws-sdk": "^2.1185.0",
     "serverless-iam-roles-per-function": "^3.2.0"
   }
 }

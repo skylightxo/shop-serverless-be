@@ -1,10 +1,10 @@
-service: parser
-frameworkVersion: '3'
+service: parser-service
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs12.x
-  region: us-east-2
+  region: eu-west-1
   stage: dev
   environment:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
@@ -13,7 +13,7 @@ plugins:
   - serverless-iam-roles-per-function
 
 custom:
-  fileBucketName: aws-course-file-storage 
+  fileBucketName: aws-course-file-storage
 
 functions:
   parser:
@@ -29,5 +29,5 @@ functions:
       - Effect: Allow
         Action:
           - "s3:*"
-        Resource: 
+        Resource:
           - arn:aws:s3:::${self:custom.fileBucketName}/*
