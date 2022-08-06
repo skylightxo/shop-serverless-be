@@ -21,6 +21,7 @@ async function bulkUpload(files, name) {
     };
     promises.push(s3.upload(params).promise());
   }
+  console.log(promises);
 
   return await Promise.all(promises);
 }
@@ -48,6 +49,11 @@ function buildResponse(body, message, code = 200, error = null) {
     message,
     body: JSON.stringify(body),
     error,
+    headers: {
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    },
   };
 }
 

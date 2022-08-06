@@ -66,14 +66,9 @@ functions:
   upload:
     handler: handler.import
     events:
-      - http:
+      - httpApi:
           path: /import
           method: post
-          request:
-            parameters:
-              querystrings:
-                name: true
-          cors: true
     # iamRoleStatements:
     #   - Effect: Allow
     #     Action:

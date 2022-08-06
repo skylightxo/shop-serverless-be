@@ -2,16 +2,17 @@ const { parse, getBoundary } = require("./multipart-parse");
 const { bulkUpload, bulkUrls, buildResponse } = require("./methods");
 
 module.exports.import = async (event) => {
-  const {
-    queryStringParameters: { name },
-  } = event;
+  const { name } = event.queryStringParameters;
+  console.log(JSON.stringify(event));
   const body = Buffer.from(event.body.toString(), "base64");
   const boundary = getBoundary(event.headers["content-type"]);
   const parsedFiles = parse(body, boundary);
 
   try {
     const files = await bulkUpload(parsedFiles, name);
+    console.log(files);
     const urls = await bulkUrls(files);
+    console.log(urls);
 
     return buildResponse({ urls }, "Successfully uploaded file(s) to S3");
   } catch (e) {
