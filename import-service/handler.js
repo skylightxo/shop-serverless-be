@@ -1,7 +1,7 @@
 const { parse, getBoundary } = require("./multipart-parse");
 const { bulkUpload, bulkUrls, buildResponse } = require("./methods");
 
-module.exports.import = async (event) => {
+module.exports.importProductsFile = async (event) => {
   const { name } = event.queryStringParameters;
   console.log(JSON.stringify(event));
   const body = Buffer.from(event.body.toString(), "base64");
