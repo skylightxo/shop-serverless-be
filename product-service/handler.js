@@ -2,6 +2,8 @@
 
 const { Client } = require("pg");
 const { newProductSchema } = require("./schemas/product.schema");
+const AWS = require("aws-sdk");
+const { createProducts, sendNewProductsNotification } = require("./methods.js");
 
 const { PG_HOST, PG_PORT, PG_DATABASE, PG_USERNAME, PG_PASSWORD } = process.env;
 
@@ -15,6 +17,16 @@ const defaultDbOptions = {
 
 const createClient = (dbOptions = {}) =>
   new Client({ ...defaultDbOptions, ...dbOptions });
+
+const catalogBatchProcess = async (event) => {
+  const products = event.Records.map(({ body }) => JSON.parse(body));
+  try {
+    await createProducts(products);
+    await sendNewProductsNotification(products);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const getProductsById = async (event) => {
   const client = createClient();
@@ -172,4 +184,5 @@ module.exports = {
   getProductsById,
   getProductsList,
   createProduct,
+  catalogBatchProcess,
 };
