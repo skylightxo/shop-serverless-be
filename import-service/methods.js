@@ -26,20 +26,15 @@ async function bulkUpload(files, name) {
   return await Promise.all(promises);
 }
 
-async function bulkUrls(files) {
-  const urls = [];
+async function getSignedUrl(name) {
+  const params = {
+    Bucket: BUCKET_NAME,
+    Key: `uploaded/${name}`,
+    Expires: Number(EXPIRES_IN),
+  };
+  const url = await s3.getSignedUrlPromise("getObject", params);
 
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const params = {
-      Bucket: BUCKET_NAME,
-      Key: `parsed/${extractName(file.key)}.json`,
-      Expires: Number(EXPIRES_IN),
-    };
-    urls.push(await s3.getSignedUrlPromise("getObject", params));
-  }
-
-  return urls;
+  return url;
 }
 
 function buildResponse(body, message, code = 200, error = null) {
@@ -59,6 +54,6 @@ function buildResponse(body, message, code = 200, error = null) {
 
 module.exports = {
   bulkUpload,
-  bulkUrls,
   buildResponse,
+  getSignedUrl,
 };

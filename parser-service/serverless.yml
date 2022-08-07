@@ -7,20 +7,17 @@ provider:
   region: eu-west-1
   stage: dev
   environment:
-    FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
+    FILE_UPLOAD_BUCKET_NAME: aws-course-files
 
 plugins:
   - serverless-iam-roles-per-function
-
-custom:
-  fileBucketName: aws-course-file-storage
 
 functions:
   parser:
     handler: handler.parser
     events:
       - s3:
-          bucket: ${self:custom.fileBucketName}
+          bucket: aws-course-files
           event: s3:ObjectCreated:*
           rules:
             - prefix: upload/
@@ -30,4 +27,4 @@ functions:
         Action:
           - "s3:*"
         Resource:
-          - arn:aws:s3:::${self:custom.fileBucketName}/*
+          - arn:aws:s3:::aws-course-files/*

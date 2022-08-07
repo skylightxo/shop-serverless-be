@@ -10,14 +10,17 @@ provider:
   memorySize: 128 # mb
   timeout: 10 # seconds
   iamRoleStatements:
-    - Effect: Allow
+    - Effect: "Allow"
+      Action: "s3:ListBucket"
+      Resource:
+        - "arn:aws:s3:::aws-course-files"
+    - Effect: "Allow"
       Action:
-        - "s3:Put*"
-        - "s3:GetObject*"
-        # Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
-      Resource: !Join ["/", [!GetAtt FileBucket.Arn, "*"]]
+        - "s3:*"
+      Resource:
+        - "arn:aws:s3:::aws-course-files/*"
   environment:
-    FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
+    FILE_UPLOAD_BUCKET_NAME: aws-course-files
     EXPIRES_IN: 86400
 
 plugins:
@@ -25,7 +28,7 @@ plugins:
   # - serverless-plugin-log-retention
 
 custom:
-  fileBucketName: aws-course-file-storage #s3-file-bucket-${self:provider.stage}
+  fileBucketName: aws-course-files #s3-file-bucket-${self:provider.stage}
   # logRetentionInDays: 5
 
 # you can overwrite defaults here
@@ -66,9 +69,14 @@ functions:
   upload:
     handler: handler.importProductsFile
     events:
-      - httpApi:
+      - http:
           path: /import
-          method: post
+          method: get
+          request:
+            parameters:
+              querystrings:
+                name: true
+          cors: true
     # iamRoleStatements:
     #   - Effect: Allow
     #     Action:
