@@ -1,0 +1,30 @@
+service: parser-service
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  stage: dev
+  environment:
+    FILE_UPLOAD_BUCKET_NAME: aws-course-files
+
+plugins:
+  - serverless-iam-roles-per-function
+
+functions:
+  parser:
+    handler: handler.parser
+    events:
+      - s3:
+          bucket: aws-course-files
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: upload/
+          existing: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - "s3:*"
+        Resource:
+          - arn:aws:s3:::aws-course-files/*
