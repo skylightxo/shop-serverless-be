@@ -77,6 +77,12 @@ functions:
               querystrings:
                 name: true
           cors: true
+          authorizer:
+            name: basicAuthorizer
+            arn: "arn:aws:lambda:eu-west-1:${env:ACCOUNT_ID}:function:authorization-service-dev-basicAuthorizer"
+            resultTtlInSeconds: 0
+            identitySource: method.request.header.Authorization
+            type: token
     # iamRoleStatements:
     #   - Effect: Allow
     #     Action:
@@ -86,17 +92,41 @@ functions:
 
 resources:
   Resources:
-    FileBucket:
-      Type: AWS::S3::Bucket
+    GatewayResponseAccessDenied:
+      Type: "AWS::ApiGateway::GatewayResponse"
       Properties:
-        BucketName: ${self:custom.fileBucketName}
-        # BucketName: !Join ["-", ["youtube-demo-private-uploads", "${self:provider.stage}"]]
-        # AccessControl: Private
-        PublicAccessBlockConfiguration:
-          BlockPublicAcls: TRUE
-          BlockPublicPolicy: TRUE
-          IgnorePublicAcls: TRUE
-          RestrictPublicBuckets: TRUE
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ResponseType: ACCESS_DENIED
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+    GatewayResponseUnauthorized:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ResponseType: UNAUTHORIZED
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+    GatewayResponseDefault500:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        RestApiId:
+          Ref: ApiGatewayRestApi
+        ResponseType: DEFAULT_5XX
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+    NewProductSQSQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: catalogItemsQueue
+  Outputs:
+    NewProductSQSQueueArn:
+      Value:
+        Fn::GetAtt: [NewProductSQSQueue, Arn]
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
