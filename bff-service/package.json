@@ -1,0 +1,21 @@
+{
+  "name": "bff-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "start": "node handler.js",
+    "eb:deploy": "eb deploy",
+    "eb-terminate": "eb terminate",
+    "eb-init": "eb init skylightxo-bff-api --platform node.js -r eu-west-1 --profile superuser",
+    "eb-create": "eb create production --single --cname skylightxo-bff-api-prod -r eu-west-1 --profile superuser"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "node-fetch": "^3.2.10"
+  }
+}
